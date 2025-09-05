@@ -31,6 +31,7 @@ export async function findOrCreateCartIdFromCookiesAction() {
 		return structuredClone(cart);
 	}
 
+	// Use legacy API for cart creation as new SDK may not have cart.create
 	const newCart = await Commerce.cartCreate();
 	await setCartCookieJson({
 		id: newCart.id,
@@ -91,7 +92,7 @@ export async function decreaseQuantity(productId: string) {
 	if (!cart) {
 		throw new Error("Cart not found");
 	}
-	await Commerce.cartChangeQuantity({
+	await Commerce.cart.update({
 		productId,
 		cartId: cart.cart.id,
 		operation: "DECREASE",

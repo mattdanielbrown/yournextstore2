@@ -1,4 +1,6 @@
 import "@/app/globals.css";
+// Configure Commerce SDK before any usage
+import "@/lib/commerce";
 import * as Commerce from "commerce-kit";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartModalProvider } from "@/context/cart-modal";

@@ -4,7 +4,7 @@ import { simpleSearch } from "./simplesearch";
 
 export const searchProducts = unstable_cache(
 	async (query: string) => {
-		const products = await Commerce.productBrowse({ first: 100 });
+		const products = await Commerce.product.browse({ first: 100 });
 		const searchResults = simpleSearch(products, query);
 		return searchResults.map((sr) => products.find((p) => p.id === sr.id)).filter(Boolean);
 	},

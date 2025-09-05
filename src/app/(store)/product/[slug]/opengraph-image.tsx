@@ -1,4 +1,4 @@
-import { accountGet, productGet } from "commerce-kit";
+import * as Commerce from "commerce-kit";
 import { ImageResponse } from "next/og";
 import { getLocale } from "@/i18n/server";
 import { formatMoney } from "@/lib/utils";
@@ -20,7 +20,10 @@ export default async function Image(props: { params: Promise<{ slug: string }> }
 	// const geistBold = fetch(new URL("./Geist-Bold.ttf", import.meta.url)).then((res) =>
 	// 	res.arrayBuffer(),
 	// );
-	const [accountResult, [product]] = await Promise.all([accountGet(), productGet({ slug: params.slug })]);
+	const [accountResult, [product]] = await Promise.all([
+		Commerce.accountGet(),
+		Commerce.product.get({ slug: params.slug }),
+	]);
 
 	if (!product) {
 		return null;

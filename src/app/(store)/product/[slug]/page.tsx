@@ -32,7 +32,7 @@ export const generateMetadata = async (props: {
 }): Promise<Metadata> => {
 	const searchParams = await props.searchParams;
 	const params = await props.params;
-	const variants = await Commerce.productGet({ slug: params.slug });
+	const variants = await Commerce.product.get({ slug: params.slug });
 
 	const selectedVariant = searchParams.variant || variants[0]?.metadata.variant;
 	const product = variants.find((variant) => variant.metadata.variant === selectedVariant);
@@ -62,7 +62,7 @@ export default async function SingleProductPage(props: {
 	const params = await props.params;
 	const searchParams = await props.searchParams;
 
-	const variants = await Commerce.productGet({ slug: params.slug });
+	const variants = await Commerce.product.get({ slug: params.slug });
 	const selectedVariant = (variants.length > 1 && searchParams.variant) || variants[0]?.metadata.variant;
 	const product = variants.find((variant) => variant.metadata.variant === selectedVariant);
 
